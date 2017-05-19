@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gosongs</title>
+  <!--<script src="/js/bj-report.js"></script>-->
+  <!--<script src="/js/bj-wrap.js"></script>-->
+  <script src="/js/jsErrorReport.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <style>
+    .box {
+      padding: 20px;
+      border: 1px solid green;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <br>
+  <p id="list"></p>
+  <hr>
+  <h2>创建用户</h2>
+  <div class="box">
+    <input type="text" id="username"/>
+    <input type="text" id="password"/>
+    <button id="btn">创建用户</button>
+  </div>
+
+  <br><br>
+  <hr>
+  <button id="error">错误</button>
+  <button id="custom">手动上报</button>
+</div>
+
+<script>
+  jsErrorReport({
+    id: 'test project', // 项目id
+    url: 'http://localhost:3000/collect', // 上报地址
+    moduleName: '模块名', // 上报模块名
+    data: {} // 自定义参数
+  });
+  function getUserList() {
+    $.get('/users/list')
+      .then(function (data) {
+        var res;
+        if (data.Code === 0) {
+          res = JSON.stringify(data.Data);
+        } else {
+          res = data.Message;
+        }
+        $('#list').html(res);
+      })
+  }
+
+  getUserList();
+
+  $('#btn').on('click', function () {
+    $.ajax({
+      type: 'POST',
+      url: '/users/create',
+      data: {
+        username: $('#username').val(),
+        password: $('#password').val()
+      },
+      success: function (data) {
+        getUserList();
+      }
+    })
+  });
+
+  $('#error').on('click', function () {
+    console.log(fuck)
+  });
+
+  $('#custom').on('click', function () {
+
+  })
+
+</script>
+</body>
+</html>
