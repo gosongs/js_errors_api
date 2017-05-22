@@ -9,7 +9,6 @@ router.post('/register', function (req, res) {
   hisIps.push(ip);
 
   var newData = {
-    uid: uuid(),
     username: req.body.username,
     password: req.body.password,
     email: req.body.email,
@@ -31,6 +30,11 @@ router.post('/register', function (req, res) {
                 Code: 0,
                 Message: 'Success'
               })
+            } else {
+              res.send({
+                Code: 0,
+                Message: '服务器错误请重试'
+              })
             }
           })
       }
@@ -43,8 +47,7 @@ router.post('/login', function (req, res) {
   models.users.findOne({where: {username: req.body.username}})
     .then(function (curUser) {
       if (curUser) {
-        console.log(curUser.dataValues)
-        if (curUser.dataValues.enable) {
+        if (curUser.dataValues.status) {
           res.send({
             Code: 404,
             Message: '用户被禁用'
@@ -66,6 +69,7 @@ router.post('/login', function (req, res) {
           res.send({
             Code: 0,
             Data: {
+              uid: curUser.dataValues.id,
               token: token
             }
           });

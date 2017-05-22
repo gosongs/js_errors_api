@@ -9,12 +9,6 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true
       },
-      // 用户id
-      uid: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-      },
       // 用户名
       username: {
         type: DataTypes.STRING,
@@ -35,8 +29,8 @@ module.exports = function (sequelize, DataTypes) {
       },
       // 是否禁用, 默认 false
       forbid: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+        type: DataTypes.INTEGER,
+        defaultValue: 0
       },
       // 登录 ip 历史
       hisIps: {

@@ -10,8 +10,8 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true
       },
-      // 唯一项目id
-      pid: {
+      // 唯一项目key
+      key: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
@@ -21,18 +21,22 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false
       },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       // 项目备注
       info: {
         type: DataTypes.STRING,
         allowNull: true
       },
       // 所属用户
-      ownerId: {
+      uid: {
         type: DataTypes.STRING,
         allowNull: false
       },
       // 是否启用, 默认false
-      enable: {
+      status: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
       }
