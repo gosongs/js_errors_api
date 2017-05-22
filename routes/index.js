@@ -19,7 +19,6 @@ router.get('/collect', function (req, res) {
     customData: q.data,
     ip: ip
   };
-  console.log(data);
   res.sendStatus(200);
 });
 

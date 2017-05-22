@@ -41,6 +41,9 @@ module.exports = function (sequelize, DataTypes) {
       // 登录 ip 历史
       hisIps: {
         type: DataTypes.STRING
+      },
+      token: {
+        type: DataTypes.STRING
       }
     },
     {
