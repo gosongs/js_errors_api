@@ -70,7 +70,9 @@ router.post('/login', function (req, res) {
             Code: 0,
             Data: {
               uid: curUser.dataValues.id,
-              token: token
+              token: token,
+              email: curUser.dataValues.email,
+              nickname: curUser.dataValues.nickname
             }
           });
         }
