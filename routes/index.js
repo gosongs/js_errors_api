@@ -59,35 +59,4 @@ router.get('/collect', function (req, res) {
   }
 });
 
-router.post('/errors/list', function (req, res) {
-  if (!req.body.key || !req.body.uid) {
-    res.send({
-      Code: 404,
-      Message: '数据不完整'
-    })
-  } else {
-    var pageNow = req.body.pageNow || 1;
-    var pageSize = req.body.pageSize || 20;
-    models.errors.findAndCountAll({
-      where: {
-        key: req.body.key
-      },
-      order: [
-        ['updatedAt', 'DESC'] // 按照更新时间降序
-      ],
-      offset: (pageNow - 1) * pageSize,
-      limit: Number(pageSize)
-    })
-      .then(function (data) {
-        res.send({
-          Code: 0,
-          Data: {
-            count: data.count,
-            rows: data.rows
-          }
-        })
-      })
-  }
-});
-
 module.exports = router;
